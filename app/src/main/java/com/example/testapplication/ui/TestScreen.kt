@@ -22,7 +22,6 @@ fun TestScreen(modifier: Modifier = Modifier, testViewModel: TestViewModel) {
     ) {
         Text(text = testUiState.message)
         Spacer(modifier = modifier.size(16.dp))
-        TextField(value = testViewModel.currentMessage, onValueChange = testViewModel.updateCurrentMessage())
     }
 }
 
