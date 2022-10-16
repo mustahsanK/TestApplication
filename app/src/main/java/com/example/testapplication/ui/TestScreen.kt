@@ -6,13 +6,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun TestScreen(modifier: Modifier = Modifier, testViewModel: TestViewModel) {
     val testUiState = TestUiState()
+    var textFieldValue by remember { mutableStateOf("") }
     
     Column(
         modifier = modifier
@@ -22,7 +23,14 @@ fun TestScreen(modifier: Modifier = Modifier, testViewModel: TestViewModel) {
     ) {
         Text(text = testUiState.message)
         Spacer(modifier = modifier.size(16.dp))
-        TextField(value = testViewModel.currentMessage, onValueChange = testViewModel.updateCurrentMessage())
+        TextField(
+            value = textFieldValue,
+            onValueChange = { newTextFieldValue ->
+                textFieldValue = newTextFieldValue
+            }
+        )
+        PostButton(modifier = modifier, onPostButtonClicked = { testViewModel.updateCurrentMessage(textFieldValue) })
+        GetButton(modifier = modifier, onGetButtonClicked = { testViewModel.updateTestState() })
     }
 }
 
