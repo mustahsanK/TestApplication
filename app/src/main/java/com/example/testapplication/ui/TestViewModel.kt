@@ -16,10 +16,10 @@ class TestViewModel: ViewModel() {
         currentMessage = entered
     }
 
-    private fun updateTestState(newMessage: String) {
+    fun updateTestState() {
         _uiState.update { currentState ->
             currentState.copy(
-                message = newMessage
+                message = currentMessage
             )
         }
     }
